@@ -3279,16 +3279,18 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
         if batch_throw == 1 or batch_throw == 2 or batch_throw == 3:
             #Loop of Each Batch Throw
             total_success_tag = 0
-            
+            unique_conversation_id = []
             #Check if AM Shift
             if shift == 1:
             
                 for batch_ff_throw in range(batch_throw):
                     throw = batch_ff_throw+1
                     
+                    #1st Throw
                     if throw == 1 and on_batch1 == 1:
                         for _ in range(20):
                             if tag_loop1 == 1:
+                                running_data_text.delete('1.0', tk.END)
                                 # Get the date from three days ago up to yesterday(AM)
                                 start_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
                                 end_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -3319,7 +3321,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
 
                                     # List to store tagged conversations
                                     tagged_conversations = []
-                                    unique_conversation_id = []
+                                    
                                     # Variable to Store Toral Successful toggles
                                     total_successful_toggles = 0
                                     
@@ -3415,6 +3417,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                     running_data_text.yview(tk.END)
                                     root.bell()
                                     # global unique_conv_id
+                                    print("Batch 1:", total_successful_toggles)
                                     total_success_tag = total_success_tag + total_successful_toggles
                                     toggle_tag_for_from_id.counter = 1
                                     
@@ -3544,7 +3547,6 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
 
                                     # List to store tagged conversations
                                     tagged_conversations = []
-                                    unique_conversation_id = []
                                     # Variable to Store Toral Successful toggles
                                     total_successful_toggles = 0
                                     
@@ -3589,7 +3591,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                                     if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
                                                         data_tree.set(item2, "Batch", f"2 / {batch_throw}")
                                                         data_tree.set(item2, "Status", "Time Out")
-                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag + total_success_tag)
+                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag)
                                                         break
 
                                                 tag_loop2 = 0
@@ -3614,7 +3616,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                                     if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
                                                         data_tree.set(item2, "Batch", f"2 / {batch_throw}")
                                                         data_tree.set(item2, "Status", "Lost Connection")
-                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag + total_success_tag)
+                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag)
                                                         break
                                                 tag_loop2 = 0
                                                 print("Batch 2 Sudden Lost Connection") 
@@ -3644,6 +3646,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                     running_data_text.yview(tk.END)
                                     root.bell()
                                     # global unique_conv_id
+                                    print("Batch 2:", total_successful_toggles)
                                     total_success_tag = total_success_tag + total_successful_toggles
                                     unique_conv_id = []
                                     toggle_tag_for_from_id.counter = 1
@@ -3727,7 +3730,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                             if total_success_tag == 0:
                                                 data_tree.set(item2, "Total Successful Toggles", "No Tag Name")
                                             else:
-                                                data_tree.set(item2, "Total Successful Toggles", "No Tag Name : Success: "+ total_success_tag)
+                                                data_tree.set(item2, "Total Successful Toggles", "No Tag Name : Success: ", total_success_tag)
                                             break
                                     tag_loop2 = 0 
                                     print("Batch 2 No more Tag")
@@ -3775,7 +3778,6 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
 
                                     # List to store tagged conversations
                                     tagged_conversations = []
-                                    unique_conversation_id = []
                                     # Variable to Store Toral Successful toggles
                                     total_successful_toggles = 0
                                     
@@ -3844,7 +3846,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                                     if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
                                                         data_tree.set(item2, "Batch", f"3 / {batch_throw}")
                                                         data_tree.set(item2, "Status", "Lost Connection")
-                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag + total_success_tag)
+                                                        data_tree.set(item2, "Total Successful Toggles", total_success_tag)
                                                         break
                                                 tag_loop3 = 0
                                                 print("Batch 3 Lost Connection")
@@ -3874,6 +3876,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                     running_data_text.yview(tk.END)
                                     root.bell()
                                     # global unique_conv_id
+                                    print("Batch 3",total_successful_toggles )
                                     total_success_tag = total_success_tag + total_successful_toggles
                                     unique_conv_id = []
                                     toggle_tag_for_from_id.counter = 1
@@ -3967,8 +3970,10 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
             
             #Check if PM Shift
             else:
+                unique_conversation_id = []
                 for _ in range(20):
                     if tag_loop1 == 1:
+                        running_data_text.delete('1.0', tk.END)
                         # PM Shift
                         # Get the date Today and Time
                         start_date = datetime.now().strftime("%Y-%m-%d")
@@ -4000,7 +4005,6 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
 
                             # List to store tagged conversations
                             tagged_conversations = []
-                            unique_conversation_id = []
                             # Variable to Store Toral Successful toggles
                             total_successful_toggles = 0
                             
@@ -4098,6 +4102,7 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                             running_data_text.yview(tk.END)
                             root.bell()
                             # global unique_conv_id
+                            print("PM", total_successful_toggles)
                             total_success_tag = total_success_tag + total_successful_toggles 
                             unique_conv_id = []
                             toggle_tag_for_from_id.counter = 1
@@ -4186,201 +4191,212 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                         unique_conv_id = []
                         print("No More Conversations in PM")
                         break
+        # Custom Throw
         else:
+            unique_conversation_id = []
             total_success_tag = 0
-            #Custom Throw (Throw Tags based on the customed datetime conversation datetime range)
-            # Combine start date, hour, minute, and second(with conversational Time)
-            start_datetime = datetime.strptime(f"{input_start_date} {input_start_hour}:{input_start_minute}:{input_start_second}", "%Y-%m-%d %H:%M:%S")
-            start_time = int(start_datetime.timestamp())
+            for _ in range(20):
+                if tag_loop1 == 1:
+                    running_data_text.delete('1.0', tk.END)
+                    #Custom Throw (Throw Tags based on the customed datetime conversation datetime range)
+                    # Combine start date, hour, minute, and second(with conversational Time)
+                    start_datetime = datetime.strptime(f"{input_start_date} {input_start_hour}:{input_start_minute}:{input_start_second}", "%Y-%m-%d %H:%M:%S")
+                    start_time = int(start_datetime.timestamp())
 
-            # Combine end date, hour, minute, and second (with conversational Time)
-            end_datetime = datetime.strptime(f"{input_end_date} {input_end_hour}:{input_end_minute}:{input_end_second}", "%Y-%m-%d %H:%M:%S")
-            end_time = int(end_datetime.timestamp())
-            
-
-            # API URL to retrieve tag info
-            tag_info_api_url = f"https://pancake.ph/api/v1/pages/{page_id}/settings?access_token={access_token}"
-
-            # Get the tag_order_id and tag_id_to_add
-            tag_order_id, tag_id_to_add = get_tag_info(tag_id_name, tag_info_api_url)
-
-            if tag_order_id is not None and tag_id_to_add is not None:
-                # Construct URL with epoch time and tag_order_id (end time edited)
-                initial_url = f"https://pancake.ph/api/v1/pages/{page_id}/conversations?type=NOPHONE,INBOX,CREATE_DATE:{start_time}+-+{end_time}&mode=OR&tags=[]&except_tags=[{tag_order_id}]&access_token={access_token}&from_platform=web"
-
-                # List to store tagged conversations
-                tagged_conversations = []
-                unique_conversation_id = []
-                # Variable to Store Toral Successful toggles
-                total_successful_toggles = 0
-                
-                # Loop through the process for the specified number of iterations
-                for iteration in range(num_iterations):
+                    # Combine end date, hour, minute, and second (with conversational Time)
+                    end_datetime = datetime.strptime(f"{input_end_date} {input_end_hour}:{input_end_minute}:{input_end_second}", "%Y-%m-%d %H:%M:%S")
+                    end_time = int(end_datetime.timestamp())
                     
-                    # Initialize progress bar
-                    progress_bar["value"] = iteration
-                    progress_bar["maximum"] = num_iterations
-                    progress_bar_label.config(text=f"Progress: {iteration+1}%")
-                    
-                    #Update Data Tree as Ongoing
-                    start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
-                    end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
-                    scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                    items3 = data_tree.get_children()
-                    for item3 in items3:
-                        values3 = data_tree.item(item3, 'values')
-                        if values3 and values3[0] == page_id and values3[1] == access_token and values3[4] == tag_id_name and values3[5] == input_start_date and values3[6] == input_end_date and values3[7] == start_time and values3[8] == end_time and values3[9] == input_start_schedule_date and values3[10] == scheduled_time:
-                            data_tree.set(item3, "Status", "Ongoing")  # Update total ongoing toggles
-                            break
-                    
-                    try:
-                        response = requests.get(initial_url)
-                        data = response.json()
-                    except requests.exceptions.JSONDecodeError:
-                        try:
-                            response = requests.get(initial_url)
-                            data = response.json()
-                        except requests.exceptions.JSONDecodeError:
+
+                    # API URL to retrieve tag info
+                    tag_info_api_url = f"https://pancake.ph/api/v1/pages/{page_id}/settings?access_token={access_token}"
+
+                    # Get the tag_order_id and tag_id_to_add
+                    tag_order_id, tag_id_to_add = get_tag_info(tag_id_name, tag_info_api_url)
+
+                    if tag_order_id is not None and tag_id_to_add is not None:
+                        # Construct URL with epoch time and tag_order_id (end time edited)
+                        initial_url = f"https://pancake.ph/api/v1/pages/{page_id}/conversations?type=NOPHONE,INBOX,CREATE_DATE:{start_time}+-+{end_time}&mode=OR&tags=[]&except_tags=[{tag_order_id}]&access_token={access_token}&from_platform=web"
+
+                        # List to store tagged conversations
+                        tagged_conversations = []
+                        # Variable to Store Toral Successful toggles
+                        total_successful_toggles = 0
+                        
+                        # Loop through the process for the specified number of iterations
+                        for iteration in range(num_iterations):
+                            
+                            # Initialize progress bar
+                            progress_bar["value"] = iteration
+                            progress_bar["maximum"] = num_iterations
+                            progress_bar_label.config(text=f"Progress: {iteration+1}%")
+                            
+                            #Update Data Tree as Ongoing
                             start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
                             end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
-                            
                             scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                            
-                            #Update Data Tree
-                            items2 = data_tree.get_children()
-                            for item2 in items2:
-                                values2 = data_tree.item(item2, 'values')
-                                if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
-                                    data_tree.set(item2, "Status", "Time Out")
-                                    data_tree.set(item2, "Total Successful Toggles", total_success_tag)
+                            items3 = data_tree.get_children()
+                            for item3 in items3:
+                                values3 = data_tree.item(item3, 'values')
+                                if values3 and values3[0] == page_id and values3[1] == access_token and values3[4] == tag_id_name and values3[5] == input_start_date and values3[6] == input_end_date and values3[7] == start_time and values3[8] == end_time and values3[9] == input_start_schedule_date and values3[10] == scheduled_time:
+                                    data_tree.set(item3, "Status", "Ongoing")  # Update total ongoing toggles
                                     break
-                            tag_loop1 = 0
-                            print("Custom Sudden Time Out")
-                            messagebox.showerror("Error", "Invalid Response/Time Out")
-                    except requests.exceptions.RequestException as e:
-                        # Handle other request exceptions
-                        try:
-                            response = requests.get(initial_url)
-                            data = response.json()
-                        except requests.exceptions.RequestException as e:
-                            start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
-                            end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
                             
-                            scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                            
-                            #Update Data Tree
-                            items2 = data_tree.get_children()
-                            for item2 in items2:
-                                values2 = data_tree.item(item2, 'values')
-                                if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
-                                    data_tree.set(item2, "Status", "Lost Connection")
-                                    data_tree.set(item2, "Total Successful Toggles", total_success_tag)
+                            try:
+                                response = requests.get(initial_url)
+                                data = response.json()
+                            except requests.exceptions.JSONDecodeError:
+                                try:
+                                    response = requests.get(initial_url)
+                                    data = response.json()
+                                except requests.exceptions.JSONDecodeError:
+                                    start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
+                                    end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
+                                    
+                                    scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
+                                    
+                                    #Update Data Tree
+                                    items2 = data_tree.get_children()
+                                    for item2 in items2:
+                                        values2 = data_tree.item(item2, 'values')
+                                        if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
+                                            data_tree.set(item2, "Status", "Time Out")
+                                            data_tree.set(item2, "Total Successful Toggles", total_success_tag)
+                                            break
+                                    tag_loop1 = 0
+                                    print("Custom Sudden Time Out")
+                                    messagebox.showerror("Error", "Invalid Response/Time Out")
+                            except requests.exceptions.RequestException as e:
+                                # Handle other request exceptions
+                                try:
+                                    response = requests.get(initial_url)
+                                    data = response.json()
+                                except requests.exceptions.RequestException as e:
+                                    start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
+                                    end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
+                                    
+                                    scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
+                                    
+                                    #Update Data Tree
+                                    items2 = data_tree.get_children()
+                                    for item2 in items2:
+                                        values2 = data_tree.item(item2, 'values')
+                                        if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
+                                            data_tree.set(item2, "Status", "Lost Connection")
+                                            data_tree.set(item2, "Total Successful Toggles", total_success_tag)
+                                            break
+                                    tag_loop1 = 0
+                                    print("Custom Lost Connection")
+                                    message = f"Request failed: {e}"
+                                    messagebox.showerror("Error", message)
+                        
+
+                            # Extract the conversations from the initial response
+                            conversations = data.get("conversations", [])
+
+                            # Process each conversation to toggle tag using threading
+                            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+                                results = executor.map(toggle_tag_for_from_id, [(conv.get("from", {}).get("id"), page_id, access_token, tag_id_to_add, running_data_text, progress_bar) for conv in conversations])
+                                for success, conv_id in zip(results, [conv.get("from", {}).get("id") for conv in conversations]):
+                                    # progress_bar["value"] += 1 # Increment total successful toggles
+                                    root.update_idletasks()  # Update GUI
+                                    if success:
+                                        if conv_id not in unique_conversation_id:
+                                            total_successful_toggles += 1
+                                            tagged_conversations.append(conv_id)
+                                            unique_conversation_id.append(conv_id)
+                                        else:
+                                            print("Already mention")
+
+                        # Update running data text
+                        running_data_text.insert(tk.END, f"Total successful tag toggles: {total_successful_toggles}\n")
+                        running_data_text.yview(tk.END)
+                        root.bell()
+                        # global unique_conv_id
+                        print("Custom", total_successful_toggles)
+                        total_success_tag = total_success_tag + total_successful_toggles
+                        unique_conv_id = []
+                        toggle_tag_for_from_id.counter = 1
+                        
+                        #Filter Start and End Time for Update of Table
+                        start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
+                        end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
+                        
+                        scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
+                        
+                        # Update the status in data_tree to "Done"
+                        for conv_id in tagged_conversations:
+                            # Find the item in the treeview with matching conversation ID
+                            items = data_tree.get_children()
+                            for item in items:
+                                values = data_tree.item(item, 'values')
+                                if values and values[0] == page_id and values[1] == access_token and values[4] == tag_id_name and values[5] == input_start_date and values[6] == input_end_date and values[7] == start_time and values[8] == end_time and values[9] == input_start_schedule_date and values[10] == scheduled_time:
+                                    data_tree.set(item, "Status", "Done")
+                                    data_tree.set(item, "Total Successful Toggles", total_success_tag)  # Update total successful toggles
                                     break
-                            tag_loop1 = 0
-                            print("Custom Lost Connection")
-                            message = f"Request failed: {e}"
-                            messagebox.showerror("Error", message)
-                 
+                        
+                        #No successful Tags/No Tags
+                        if total_successful_toggles == 0:
+                            items = data_tree.get_children()
+                            for item in items:
+                                values = data_tree.item(item, 'values')
+                                if values and values[0] == page_id and values[1] == access_token and values[4] == tag_id_name and values[5] == input_start_date and values[6] == input_end_date and values[7] == start_time and values[8] == end_time and values[9] == input_start_schedule_date and values[10] == scheduled_time:
+                                    data_tree.set(item, "Status", "Done")
+                                    data_tree.set(item, "Total Successful Toggles", total_success_tag)  # Update total successful toggles
+                                    break
+                            tag_loop1 = 0 
+                            print("Custom No More Conversations")
 
-                    # Extract the conversations from the initial response
-                    conversations = data.get("conversations", [])
-
-                    # Process each conversation to toggle tag using threading
-                    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-                        results = executor.map(toggle_tag_for_from_id, [(conv.get("from", {}).get("id"), page_id, access_token, tag_id_to_add, running_data_text, progress_bar) for conv in conversations])
-                        for success, conv_id in zip(results, [conv.get("from", {}).get("id") for conv in conversations]):
-                            # progress_bar["value"] += 1 # Increment total successful toggles
-                            root.update_idletasks()  # Update GUI
-                            if success:
-                                if conv_id not in unique_conversation_id:
-                                    total_successful_toggles += 1
-                                    tagged_conversations.append(conv_id)
-                                    unique_conversation_id.append(conv_id)
-                                else:
-                                    print("Already mention")
-
-                # Update running data text
-                running_data_text.insert(tk.END, f"Total successful tag toggles: {total_successful_toggles}\n")
-                running_data_text.yview(tk.END)
-                root.bell()
-                # global unique_conv_id
-                total_success_tag = total_success_tag + total_successful_toggles
-                unique_conv_id = []
-                toggle_tag_for_from_id.counter = 1
-                
-                #Filter Start and End Time for Update of Table
-                start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
-                end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
-                
-                scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                
-                # Update the status in data_tree to "Done"
-                for conv_id in tagged_conversations:
-                    # Find the item in the treeview with matching conversation ID
-                    items = data_tree.get_children()
-                    for item in items:
-                        values = data_tree.item(item, 'values')
-                        if values and values[0] == page_id and values[1] == access_token and values[4] == tag_id_name and values[5] == input_start_date and values[6] == input_end_date and values[7] == start_time and values[8] == end_time and values[9] == input_start_schedule_date and values[10] == scheduled_time:
-                            data_tree.set(item, "Status", "Done")
-                            data_tree.set(item, "Total Successful Toggles", total_success_tag)  # Update total successful toggles
-                            break
-                
-                #No successful Tags/No Tags
-                if total_successful_toggles == 0:
-                    items = data_tree.get_children()
-                    for item in items:
-                        values = data_tree.item(item, 'values')
-                        if values and values[0] == page_id and values[1] == access_token and values[4] == tag_id_name and values[5] == input_start_date and values[6] == input_end_date and values[7] == start_time and values[8] == end_time and values[9] == input_start_schedule_date and values[10] == scheduled_time:
-                            data_tree.set(item, "Status", "Done")
-                            data_tree.set(item, "Total Successful Toggles", total_success_tag)  # Update total successful toggles
-                            break
-                    tag_loop1 = 0 
-                    print("Custom No More Conversations")
-
-                # Enable download button
-                download_button.config(state="normal")
-                download_button['command'] = lambda: download_data(tagged_conversations)
-            
-            #Time Out Error
-            elif tag_order_id == "error" and tag_id_to_add == "time_out":
-                start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
-                end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
-                
-                scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                
-                #Update Data Tree
-                items2 = data_tree.get_children()
-                for item2 in items2:
-                    values2 = data_tree.item(item2, 'values')
-                    if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
-                        data_tree.set(item2, "Status", "Time Out")
-                        data_tree.set(item2, "Total Successful Toggles", total_success_tag)
-                        break
-                tag_loop1 = 0 
-                print("Custom Time Out")
-            else:
-                
-                running_data_text.insert(tk.END, f"Error: No tag with the name '{tag_id_name}' found.\n")
-                running_data_text.yview(tk.END)
-                
-                start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
-                end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
-                
-                scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
-                
-                #Update Data Tree
-                items2 = data_tree.get_children()
-                print("exe", page_id,access_token,tag_id_name ,input_start_date,input_end_date,start_time, end_time,input_start_schedule_date ,scheduled_time )
-                for item2 in items2:
-                    values2 = data_tree.item(item2, 'values')
-                    print("table", values2[0] ,values2[1],values2[4], values2[5], values2[6], values2[7],values2[8] ,values2[9],values2[10])
-                    if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
-                        data_tree.set(item2, "Status", "Failed")
-                        data_tree.set(item2, "Total Successful Toggles", "No Tag Name")
-                        break
-                tag_loop1 = 0
-                print("Custom No Tag")
+                        # Enable download button
+                        download_button.config(state="normal")
+                        download_button['command'] = lambda: download_data(tagged_conversations)
                     
+                    #Time Out Error
+                    elif tag_order_id == "error" and tag_id_to_add == "time_out":
+                        start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
+                        end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
+                        
+                        scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
+                        
+                        #Update Data Tree
+                        items2 = data_tree.get_children()
+                        for item2 in items2:
+                            values2 = data_tree.item(item2, 'values')
+                            if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
+                                data_tree.set(item2, "Status", "Time Out")
+                                data_tree.set(item2, "Total Successful Toggles", total_success_tag)
+                                break
+                        tag_loop1 = 0 
+                        print("Custom Time Out")
+                    else:
+                        
+                        running_data_text.insert(tk.END, f"Error: No tag with the name '{tag_id_name}' found.\n")
+                        running_data_text.yview(tk.END)
+                        
+                        start_time = f'{input_start_hour}:{input_start_minute} {input_start_second}'
+                        end_time = f'{input_end_hour}:{input_end_minute} {input_end_second}'
+                        
+                        scheduled_time = f"{input_schedule_hour}:{input_schedule_minute} {input_schedule_ampm}"
+                        
+                        #Update Data Tree
+                        items2 = data_tree.get_children()
+                        print("exe", page_id,access_token,tag_id_name ,input_start_date,input_end_date,start_time, end_time,input_start_schedule_date ,scheduled_time )
+                        for item2 in items2:
+                            values2 = data_tree.item(item2, 'values')
+                            print("table", values2[0] ,values2[1],values2[4], values2[5], values2[6], values2[7],values2[8] ,values2[9],values2[10])
+                            if values2 and values2[0] == page_id and values2[1] == access_token and values2[4] == tag_id_name and values2[5] == input_start_date and values2[6] == input_end_date and values2[7] == start_time and values2[8] == end_time and values2[9] == input_start_schedule_date and values2[10] == scheduled_time:
+                                data_tree.set(item2, "Status", "Failed")
+                                data_tree.set(item2, "Total Successful Toggles", "No Tag Name")
+                                break
+                        tag_loop1 = 0
+                        print("Custom No Tag")
+                
+                else:
+                    tag_loop1 = 1
+                    unique_conv_id = []
+                    print("No More Conversations in PM")
+                    break
+
     elif datetime.now() > check_end_schedule_date:
         schedule.clear('execute_task')
 
