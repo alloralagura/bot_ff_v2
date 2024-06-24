@@ -17,6 +17,7 @@ from tkinter import messagebox
 
 #Store Scheduled Throw of Tags
 scheduled_tag_jobs = {}
+# file_path = None
 
 # Function to convert date string to epoch time
 def date_to_epoch(date_str):
@@ -3239,6 +3240,8 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
         running_data_text.delete('1.0', tk.END) 
         print("page id", page_id)
 
+        # file_path = download_data(page_id)
+
         #Generate Tag For Today
         current_time = datetime.now().time()
         current_day = datetime.now().date()
@@ -3460,8 +3463,8 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                         print("Batch 1 Conversation = 0")
 
                                     # Enable download button
-                                    download_button.config(state="normal")
-                                    download_button['command'] = lambda: download_data(tagged_conversations)
+                                    # download_button.config(state="normal")
+                                    # download_button['command'] = lambda: download_data(tagged_conversations)
                                     
                                 #Time Out Error
                                 elif tag_order_id == "error" and tag_id_to_add == "time_out":
@@ -3510,6 +3513,21 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                             else:
                                 tag_loop1 = 1
                                 unique_conv_id = []
+
+                                # Save In Log Txt
+                                # log_to_txt("===================================")
+                                # log_to_txt(f"Page ID:{page_id}")
+                                # log_to_txt(f"Access Token:{access_token}")
+                                # log_to_txt(f"Max Workers:{max_workers}")
+                                # log_to_txt(f"Tag ID Name:{tag_id_name}")
+                                # log_to_txt(f"Conversation Start Date:{input_start_date}")
+                                # log_to_txt(f"Conversation End Date:{input_end_date}")
+                                # log_to_txt(f"Conversation Start Time:{input_start_hour}:{input_start_minute}: {input_start_second}")
+                                # log_to_txt(f"Conversation End Time:{input_end_hour}:{input_end_minute}: {input_end_second}")
+                                # log_to_txt(f"Scheduled Date:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Scheduled Time:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Total Success Tag:{total_success_tag}")
+                                # log_to_txt("===================================")
                                 print("No More Conversations in Batch 1")
                                 break
 
@@ -3688,8 +3706,8 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                         print("No more Conversations in Batch 2")
 
                                     # Enable download button
-                                    download_button.config(state="normal")
-                                    download_button['command'] = lambda: download_data(tagged_conversations)
+                                    # download_button.config(state="normal")
+                                    # download_button['command'] = lambda: download_data(tagged_conversations)
                                     
                                 #Time Out Error
                                 elif tag_order_id == "error" and tag_id_to_add == "time_out":
@@ -3741,7 +3759,24 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                     print("Batch 2 No more Tag")
                             else:
                                 tag_loop2 = 1
+
                                 unique_conv_id = []
+
+                                # Save In Log Txt
+                                # log_to_txt("===================================")
+                                # log_to_txt(f"Page ID:{page_id}")
+                                # log_to_txt(f"Access Token:{access_token}")
+                                # log_to_txt(f"Max Workers:{max_workers}")
+                                # log_to_txt(f"Tag ID Name:{tag_id_name}")
+                                # log_to_txt(f"Conversation Start Date:{input_start_date}")
+                                # log_to_txt(f"Conversation End Date:{input_end_date}")
+                                # log_to_txt(f"Conversation Start Time:{input_start_hour}:{input_start_minute}: {input_start_second}")
+                                # log_to_txt(f"Conversation End Time:{input_end_hour}:{input_end_minute}: {input_end_second}")
+                                # log_to_txt(f"Scheduled Date:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Scheduled Time:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Total Success Tag:{total_success_tag}")
+                                # log_to_txt("===================================")
+
                                 print("No More Conversations in Batch 2")
                                 break
                                     
@@ -3917,8 +3952,8 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                         print("Batch 3 No more Conversation = 0")
 
                                     # Enable download button
-                                    download_button.config(state="normal")
-                                    download_button['command'] = lambda: download_data(tagged_conversations)
+                                    # download_button.config(state="normal")
+                                    # download_button['command'] = lambda: download_data(tagged_conversations)
                                 
                                 #Time Out Error
                                 elif tag_order_id == "error" and tag_id_to_add == "time_out":
@@ -3970,6 +4005,21 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                             else:
                                 tag_loop3 = 1
                                 unique_conv_id = []
+
+                                # Save In Log Txt
+                                # log_to_txt("===================================")
+                                # log_to_txt(f"Page ID:{page_id}")
+                                # log_to_txt(f"Access Token:{access_token}")
+                                # log_to_txt(f"Max Workers:{max_workers}")
+                                # log_to_txt(f"Tag ID Name:{tag_id_name}")
+                                # log_to_txt(f"Conversation Start Date:{input_start_date}")
+                                # log_to_txt(f"Conversation End Date:{input_end_date}")
+                                # log_to_txt(f"Conversation Start Time:{input_start_hour}:{input_start_minute}: {input_start_second}")
+                                # log_to_txt(f"Conversation End Time:{input_end_hour}:{input_end_minute}: {input_end_second}")
+                                # log_to_txt(f"Scheduled Date:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Scheduled Time:{input_start_schedule_date} - {input_end_schedule_date}")
+                                # log_to_txt(f"Total Success Tag:{total_success_tag}")
+                                # log_to_txt("===================================")
                                 print("No More Conversations in Batch 3")
                                 break
             
@@ -4145,8 +4195,8 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                                 print("PM No more Conversation = 0") 
 
                             # Enable download button
-                            download_button.config(state="normal")
-                            download_button['command'] = lambda: download_data(tagged_conversations)
+                            # download_button.config(state="normal")
+                            # download_button['command'] = lambda: download_data(tagged_conversations)
                                     
                         #Time Out Error
                         elif tag_order_id == "error" and tag_id_to_add == "time_out":
@@ -4194,6 +4244,22 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                     else:
                         tag_loop1 = 1
                         unique_conv_id = []
+
+                        # # Save In Log Txt
+                        # log_to_txt("===================================")
+                        # log_to_txt(f"Page ID:{page_id}")
+                        # log_to_txt(f"Access Token:{access_token}")
+                        # log_to_txt(f"Max Workers:{max_workers}")
+                        # log_to_txt(f"Tag ID Name:{tag_id_name}")
+                        # log_to_txt(f"Conversation Start Date:{input_start_date}")
+                        # log_to_txt(f"Conversation End Date:{input_end_date}")
+                        # log_to_txt(f"Conversation Start Time:{input_start_hour}:{input_start_minute}: {input_start_second}")
+                        # log_to_txt(f"Conversation End Time:{input_end_hour}:{input_end_minute}: {input_end_second}")
+                        # log_to_txt(f"Scheduled Date:{input_start_schedule_date} - {input_end_schedule_date}")
+                        # log_to_txt(f"Scheduled Time:{input_start_schedule_date} - {input_end_schedule_date}")
+                        # log_to_txt(f"Total Success Tag:{total_success_tag}")
+                        # log_to_txt("===================================")
+
                         print("No More Conversations in PM")
                         break
         # Custom Throw
@@ -4353,8 +4419,10 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                             print("Custom No More Conversations")
 
                         # Enable download button
-                        download_button.config(state="normal")
-                        download_button['command'] = lambda: download_data(tagged_conversations)
+                        # download_button.config(state="normal")
+                        # download_button['command'] = lambda: download_data(tagged_conversations)
+
+                        
                     
                     #Time Out Error
                     elif tag_order_id == "error" and tag_id_to_add == "time_out":
@@ -4398,7 +4466,24 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
                 
                 else:
                     tag_loop1 = 1
+                    
                     unique_conv_id = []
+
+                    # Save In Log Txt
+                    # log_to_txt("===================================")
+                    # log_to_txt(f"Page ID:{page_id}")
+                    # log_to_txt(f"Access Token:{access_token}")
+                    # log_to_txt(f"Max Workers:{max_workers}")
+                    # log_to_txt(f"Tag ID Name:{tag_id_name}")
+                    # log_to_txt(f"Conversation Start Date:{input_start_date}")
+                    # log_to_txt(f"Conversation End Date:{input_end_date}")
+                    # log_to_txt(f"Conversation Start Time:{input_start_hour}:{input_start_minute}: {input_start_second}")
+                    # log_to_txt(f"Conversation End Time:{input_end_hour}:{input_end_minute}: {input_end_second}")
+                    # log_to_txt(f"Scheduled Date:{input_start_schedule_date} - {input_end_schedule_date}")
+                    # log_to_txt(f"Scheduled Time:{input_start_schedule_date} - {input_end_schedule_date}")
+                    # log_to_txt(f"Total Success Tag:{total_success_tag}")
+                    # log_to_txt("===================================")
+                    
                     print("No More Conversations in PM")
                     break
 
@@ -4592,19 +4677,18 @@ def update_table(batch):
         # Apply the blue text tag to the scheduled date and time
         data_tree.tag_configure("blue_text", foreground="blue")
 
+# def log_to_txt(text):
+#     if file_path:
+#         with open(file_path, "a") as log_file:
+#             log_file.write(text + "\n")
 
 # Function to download the processed data
-def download_data(tagged_conversations):
-    # Ask user for file path to save the data
-    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+# def download_data(page_id):
+#     # Ask user for file path to save the data
+#     current_date = datetime.now().strftime("%m_%d")
+#     file_path = f"terminal_logs_{page_id}_{current_date}.txt"
     
-    # If file path is not empty, save the data to the file
-    if file_path:
-        with open(file_path, "w") as file:
-            for conv_id in tagged_conversations:
-                file.write(f"{conv_id}\n")
-        
-        messagebox.showinfo("Download Successful", "Data downloaded successfully.")
+#     return file_path
 
 
 # Create main window
@@ -4978,9 +5062,9 @@ auto_run_var.set(0)
 submit_button = ttk.Button(form, text="Submit", command=submit_form)
 submit_button.grid(row=15, column=0, pady=10)  # Adjusted row position
 
-# Download Button
-download_button = ttk.Button(form, text="Download Data", command=lambda: download_data(None), state="disabled")
-download_button.grid(row=15, column=1, pady=10)  # Adjusted row position
+# # Download Button
+# download_button = ttk.Button(form, text="Download Data", command=lambda: download_data(None), state="disabled")
+# download_button.grid(row=15, column=1, pady=10)  # Adjusted row position
 
 # Progress bar
 progress_bar = ttk.Progressbar(form, orient="horizontal", length=200, mode="determinate")
