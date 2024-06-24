@@ -2238,6 +2238,7 @@ def toggle_tag_for_from_id(args):
     
     #List of unique conversation ID
     global unique_conv_id
+    global terminal_unique_conv_id
     conversation_id = f"{page_id}_{from_id}"
     
     #Check if Conversation ID already mentioned
@@ -2245,12 +2246,15 @@ def toggle_tag_for_from_id(args):
         unique_conv_id.append(from_id)
         
         # Construct the message with counter
-        message = f"#{toggle_tag_for_from_id.counter} Tagged conversation: {conversation_id}\n"
-        toggle_tag_for_from_id.counter += 1
-    
-        # Print the message to the UI
-        running_data_text.insert(tk.END, message)
-        running_data_text.yview(tk.END)
+        if from_id not in terminal_unique_conv_id:
+            message = f"#{toggle_tag_for_from_id.counter} Tagged conversation: {conversation_id}\n"
+            toggle_tag_for_from_id.counter += 1
+        
+            # Print the message to the UI
+            running_data_text.insert(tk.END, message)
+            running_data_text.yview(tk.END)
+
+            terminal_unique_conv_id.append(from_id)
 
         # Construct the URL for toggling tags
         toggle_tag_url = f"https://pancake.ph/api/v1/pages/{page_id}/conversations/{conversation_id}/toggle_tag?access_token={access_token}"
@@ -2295,6 +2299,7 @@ def toggle_tag_for_from_id(args):
            
 toggle_tag_for_from_id.counter = 1  # Initialize the counter
 unique_conv_id = [] #form Id/Conversational ID List
+terminal_unique_conv_id = []
 tag_loop1 = 1
 tag_loop2 = 1
 tag_loop3 = 1
@@ -4399,6 +4404,9 @@ def execute_task(page_id, access_token, num_iterations, max_workers, tag_id_name
 
     elif datetime.now() > check_end_schedule_date:
         schedule.clear('execute_task')
+
+    global terminal_unique_conv_id
+    terminal_unique_conv_id = []
 
     # return page_id, access_token, num_iterations, max_workers, tag_id_name, input_start_date, input_end_date, input_start_hour, input_start_minute, input_start_second, input_end_hour, input_end_minute, input_end_second, shift, batch_throw, input_start_schedule_date, input_schedule_hour, input_schedule_minute, input_schedule_ampm, input_end_schedule_date, scheduled_pattern, on_batch1, on_batch2, on_batch3
     # Re-enable submit button after execution
